@@ -4,8 +4,11 @@ extends Area2D
 @export var sprite: Sprite2D
 @export var collision_shape: CollisionShape2D
 @export var timer_ring: TextureProgressBar
+@export var minigame_scenes: Array[PackedScene] = []
 
 var level: Node2D
+var minigame_layer: CanvasLayer
+var current_minigame: Node = null
 
 signal green_point()
 var green_sent: bool = false
@@ -23,11 +26,11 @@ func _ready() -> void:
 	collision_shape.disabled = true
 	sprite.visible = false
 	timer_ring.visible = false
-	#conectando ao running do level
 	is_running = false
 	level = get_parent()
 	level.running_changed.connect(change_running)
-	
+	minigame_layer = level.get_node("MinigameLayer")
+
 	input_event.connect(_on_input_event)
 
 func _process(delta: float) -> void:
@@ -36,7 +39,7 @@ func _process(delta: float) -> void:
 		active_timer = max(active_timer, 0.0)
 		timer_ring.value = active_timer
 		_update_color()
-		
+
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if is_free:
 		return
@@ -45,7 +48,39 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 
 func _on_clicked() -> void:
 	level.change_running(false)
+	_spawn_minigame()
 	print("%s foi clicado!" % name)
+
+func _spawn_minigame() -> void:
+	if minigame_scenes.is_empty():
+		push_warning("Nenhum minigame configurado em %s" % name)
+		return
+
+	var scene: PackedScene = minigame_scenes.pick_random()
+	current_minigame = scene.instantiate()
+	minigame_layer.add_child(current_minigame)
+	current_minigame.minigame_finished.connect(_on_minigame_finished)
+
+func _on_minigame_finished(success: bool) -> void:
+	current_minigame.queue_free()
+	current_minigame = null
+
+	if success:
+		print("%s: minigame concluído!" % name)
+	else:
+		print("%s: minigame fracassado!" % name)
+
+	level.change_running(true)
+	_deactivate()
+
+func _deactivate() -> void:
+	is_free = true
+	green_sent = false
+	yellow_sent = false
+	red_sent = false
+	sprite.visible = false
+	timer_ring.visible = false
+	collision_shape.disabled = true
 
 func activate(duration: float) -> void:
 	is_free = false

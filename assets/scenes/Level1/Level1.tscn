@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://cg381vcasw0ba" path="res://assets/scenes/leveldata/level_01.tres" id="2_pmnoc"]
 [ext_resource type="PackedScene" uid="uid://dvxoyqqygacuy" path="res://assets/scenes/point.tscn" id="3_cgcoo"]
 [ext_resource type="Script" uid="uid://dllfoqvgc5xlm" path="res://assets/scenes/Level1/hud.gd" id="3_pmnoc"]
+[ext_resource type="PackedScene" uid="uid://u1xu38as3u6o" path="res://assets/scenes/minigames/minigame_a/minigame_test.tscn" id="5_omqrc"]
 
 [node name="Level1" type="Node2D" unique_id=1535856123]
 script = ExtResource("1_6l8r6")
@@ -30,11 +31,10 @@ show_percentage = false
 
 [node name="Point1" parent="." unique_id=558440410 instance=ExtResource("3_cgcoo")]
 position = Vector2(200, 361)
-
-[node name="Point2" parent="." unique_id=1366311444 instance=ExtResource("3_cgcoo")]
-position = Vector2(496, 209)
-
-[node name="Point3" parent="." unique_id=1969147048 instance=ExtResource("3_cgcoo")]
-position = Vector2(648, 428)
+minigame_scenes = Array[PackedScene]([ExtResource("5_omqrc")])
 
 [node name="MinigameLayer" type="CanvasLayer" parent="." unique_id=1935992020]
+
+[node name="Point2" parent="." unique_id=236871632 instance=ExtResource("3_cgcoo")]
+position = Vector2(401, 224)
+minigame_scenes = Array[PackedScene]([ExtResource("5_omqrc")])
