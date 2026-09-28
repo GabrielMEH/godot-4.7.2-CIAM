@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cyxbdeufsi33q"]
+
+[ext_resource type="Script" uid="uid://b4lt5u310p2yq" path="res://assets/scenes/Level1/level_1.gd" id="1_6l8r6"]
+[ext_resource type="Resource" uid="uid://cg381vcasw0ba" path="res://assets/scenes/leveldata/level_01.tres" id="2_pmnoc"]
+[ext_resource type="PackedScene" uid="uid://dvxoyqqygacuy" path="res://assets/scenes/point.tscn" id="3_cgcoo"]
+[ext_resource type="Script" uid="uid://dllfoqvgc5xlm" path="res://assets/scenes/Level1/hud.gd" id="3_pmnoc"]
+
+[node name="Level1" type="Node2D" unique_id=1535856123]
+script = ExtResource("1_6l8r6")
+level_data = ExtResource("2_pmnoc")
+
+[node name="Hud" type="CanvasLayer" parent="." unique_id=876693578]
+script = ExtResource("3_pmnoc")
+
+[node name="time_limit_bar" type="ProgressBar" parent="Hud" unique_id=1289614950]
+offset_right = 576.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(1, 0.66294235, 0.13171518, 1)
+fill_mode = 1
+show_percentage = false
+
+[node name="level_progress_bar" type="ProgressBar" parent="Hud" unique_id=929911271]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -576.0
+offset_bottom = 27.0
+grow_horizontal = 0
+show_percentage = false
+
+[node name="Point1" parent="." unique_id=558440410 instance=ExtResource("3_cgcoo")]
+position = Vector2(200, 361)
+
+[node name="Point2" parent="." unique_id=1366311444 instance=ExtResource("3_cgcoo")]
+position = Vector2(496, 209)
+
+[node name="Point3" parent="." unique_id=1969147048 instance=ExtResource("3_cgcoo")]
+position = Vector2(648, 428)
+
+[node name="MinigameLayer" type="CanvasLayer" parent="." unique_id=1935992020]

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://cg381vcasw0ba"]
+
+[ext_resource type="Script" uid="uid://bmhx0yvqgkdud" path="res://assets/scenes/leveldata/level_data.gd" id="1_8fpq6"]
+
+[resource]
+script = ExtResource("1_8fpq6")
+level_name = "nível 1"
+time_limit = 300.0
+point_cooldown = 5.0
+metadata/_custom_type_script = "uid://bmhx0yvqgkdud"
