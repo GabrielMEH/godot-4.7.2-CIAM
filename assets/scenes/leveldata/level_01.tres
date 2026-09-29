@@ -5,6 +5,5 @@
 [resource]
 script = ExtResource("1_8fpq6")
 level_name = "nível 1"
-time_limit = 300.0
 point_cooldown = 5.0
 metadata/_custom_type_script = "uid://bmhx0yvqgkdud"

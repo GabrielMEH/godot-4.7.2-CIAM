@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bsywyfe78xpre"]
 
 [ext_resource type="Script" uid="uid://cbw34mvtd5aas" path="res://assets/scenes/main_menu/main_menu.gd" id="1_acsil"]
-[ext_resource type="Texture2D" uid="uid://d3f3phbmbui4q" path="res://1-1.jpg" id="2_8qhov"]
+[ext_resource type="Texture2D" uid="uid://dsb2ceb3qde40" path="res://title_mock.png" id="2_acsil"]
 [ext_resource type="FontFile" uid="uid://ce7hwvbr6rbep" path="res://fonts/GrapeSoda.ttf" id="3_spayh"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y41jf"]
-texture = ExtResource("2_8qhov")
+texture = ExtResource("2_acsil")
 modulate_color = Color(0.46843272, 0.46843272, 0.46843272, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygt5n"]

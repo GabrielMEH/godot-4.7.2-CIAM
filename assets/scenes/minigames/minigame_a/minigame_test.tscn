@@ -1,10 +1,68 @@
 [gd_scene format=3 uid="uid://u1xu38as3u6o"]
 
-[ext_resource type="Script" uid="uid://2acjfaxwahiq" path="res://minigame_a.gd" id="1_o5olm"]
-[ext_resource type="Script" uid="uid://ckqr8cxurdaqh" path="res://assets/scenes/minigames/minigame_a/minigame_a_node.gd" id="2_4uuju"]
+[ext_resource type="Script" uid="uid://2acjfaxwahiq" path="res://assets/scenes/minigames/minigame_a.gd" id="1_o5olm"]
+[ext_resource type="Texture2D" uid="uid://d3juiqrevec68" path="res://icon.svg" id="2_1efl3"]
+[ext_resource type="Script" uid="uid://r4yfs5hln74s" path="res://assets/scenes/minigames/minigame_a/trash.gd" id="2_4tnbk"]
+[ext_resource type="Texture2D" uid="uid://bisynj7k4uhyl" path="res://Image #2(2).png" id="3_77opj"]
+[ext_resource type="Script" uid="uid://b4m5pn6gbosu7" path="res://assets/scenes/minigames/minigame_a/trash_can.gd" id="4_77opj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_osicj"]
+atlas = ExtResource("3_77opj")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdm2o"]
+radius = 44.04543
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdm2o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdm2o"]
+atlas = ExtResource("3_77opj")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3c2fn"]
 
 [node name="minigame_a" type="Node2D" unique_id=1340375373]
 script = ExtResource("1_o5olm")
 
-[node name="Node" type="Node" parent="." unique_id=1394652883]
-script = ExtResource("2_4uuju")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=485007180]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_1efl3")
+region_enabled = true
+region_rect = Rect2(0, 0, 1400, 800)
+
+[node name="Trash" type="RigidBody2D" parent="." unique_id=1095633944 groups=["trash"]]
+position = Vector2(0, 128)
+input_pickable = true
+script = ExtResource("2_4tnbk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Trash" unique_id=1841692305]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_osicj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trash" unique_id=175166752]
+shape = SubResource("CircleShape2D_fdm2o")
+
+[node name="TrashCan" type="Area2D" parent="." unique_id=806118591]
+position = Vector2(346, 102)
+script = ExtResource("4_77opj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrashCan" unique_id=1923308030]
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_fdm2o")
+
+[node name="Sprite2D" type="Sprite2D" parent="TrashCan" unique_id=1421867816]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_fdm2o")
+
+[node name="TimeLimit" type="Timer" parent="." unique_id=1346565063]
+
+[node name="TimerLabel" type="Label" parent="." unique_id=498032999]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1125742650]
+position = Vector2(0, 43)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=1035178789]
+position = Vector2(0, 142)
+shape = SubResource("WorldBoundaryShape2D_3c2fn")

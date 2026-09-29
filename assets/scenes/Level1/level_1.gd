@@ -23,9 +23,8 @@ func _ready() -> void:
 	progress_limit_curr = 0
 	is_running = true
 	time_updated.emit(time_limit_timer, level_data.time_limit)
+	progress_updated.emit(0, level_data.progress_required)
 	point_cooldown_timer = level_data.point_cooldown
-	points = get_tree().get_nodes_in_group("points")
-
 	points = get_tree().get_nodes_in_group("points")
 
 func _process(delta: float) -> void:
@@ -71,12 +70,13 @@ func time_up() -> void:
 	is_running = false
 	print("Time's up!")
 	time_expired.emit()
+	get_tree().change_scene_to_file("res://assets/scenes/main_menu/main_menu.tscn")
 
 func change_running(value: bool):
 	is_running = value
 	running_changed.emit(value)
 	
-func progress(value: float) -> void:
+func add_progress(value: float) -> void:
 	if progress_limit_curr + value >= level_data.progress_required:
 		progress_limit_curr = level_data.progress_required
 		progress_finished.emit()

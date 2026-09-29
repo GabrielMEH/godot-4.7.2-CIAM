@@ -61,14 +61,16 @@ func _spawn_minigame() -> void:
 	minigame_layer.add_child(current_minigame)
 	current_minigame.minigame_finished.connect(_on_minigame_finished)
 
-func _on_minigame_finished(success: bool) -> void:
+func _on_minigame_finished(success: bool, value: float) -> void:
 	current_minigame.queue_free()
 	current_minigame = null
 
 	if success:
 		print("%s: minigame concluído!" % name)
+		level.add_progress(value)
 	else:
 		print("%s: minigame fracassado!" % name)
+		level.add_progress(-value)
 
 	level.change_running(true)
 	_deactivate()
@@ -80,7 +82,7 @@ func _deactivate() -> void:
 	red_sent = false
 	sprite.visible = false
 	timer_ring.visible = false
-	collision_shape.disabled = true
+	collision_shape.set_deferred("disabled", true)
 
 func activate(duration: float) -> void:
 	is_free = false

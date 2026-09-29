@@ -4,7 +4,24 @@
 [ext_resource type="Resource" uid="uid://cg381vcasw0ba" path="res://assets/scenes/leveldata/level_01.tres" id="2_pmnoc"]
 [ext_resource type="PackedScene" uid="uid://dvxoyqqygacuy" path="res://assets/scenes/point.tscn" id="3_cgcoo"]
 [ext_resource type="Script" uid="uid://dllfoqvgc5xlm" path="res://assets/scenes/Level1/hud.gd" id="3_pmnoc"]
+[ext_resource type="Texture2D" uid="uid://bisynj7k4uhyl" path="res://Image #2(2).png" id="4_cgs8v"]
+[ext_resource type="FontFile" uid="uid://ce7hwvbr6rbep" path="res://fonts/GrapeSoda.ttf" id="5_lg6ro"]
 [ext_resource type="PackedScene" uid="uid://u1xu38as3u6o" path="res://assets/scenes/minigames/minigame_a/minigame_test.tscn" id="5_omqrc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdm2o"]
+atlas = ExtResource("4_cgs8v")
+region = Rect2(768, 0, 1280, 384)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cgs8v"]
+load_path = "res://.godot/imported/Image #2(2).png-d5254dbdd99c5a5cd3ebe66cab7d887d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3c2fn"]
+atlas = SubResource("CompressedTexture2D_cgs8v")
+region = Rect2(777.8137, 384, 515.85156, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhviw"]
+atlas = ExtResource("4_cgs8v")
+region = Rect2(1524.373, 384, 512.4352, 256)
 
 [node name="Level1" type="Node2D" unique_id=1535856123]
 script = ExtResource("1_6l8r6")
@@ -13,28 +30,81 @@ level_data = ExtResource("2_pmnoc")
 [node name="Hud" type="CanvasLayer" parent="." unique_id=876693578]
 script = ExtResource("3_pmnoc")
 
-[node name="time_limit_bar" type="ProgressBar" parent="Hud" unique_id=1289614950]
-offset_right = 576.0
-offset_bottom = 27.0
-theme_override_colors/font_color = Color(1, 0.66294235, 0.13171518, 1)
+[node name="time_limit_bar" type="TextureProgressBar" parent="Hud" unique_id=1042433875]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 384.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(634, 0)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+step = 0.1
+value = 33.1
 fill_mode = 1
-show_percentage = false
+texture_under = SubResource("AtlasTexture_fdm2o")
+texture_progress = SubResource("AtlasTexture_3c2fn")
+texture_progress_offset = Vector2(9.825, 3.52)
 
-[node name="level_progress_bar" type="ProgressBar" parent="Hud" unique_id=929911271]
-anchors_preset = 1
+[node name="Label" type="Label" parent="Hud/time_limit_bar" unique_id=1842087801]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -188.0
+offset_right = 184.0
+offset_bottom = -124.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_lg6ro")
+theme_override_font_sizes/font_size = 64
+text = "Tempo "
+
+[node name="level_progress_bar" type="TextureProgressBar" parent="Hud" unique_id=194317172]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_right = 320.0
+offset_bottom = 256.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+step = 0.1
+texture_progress = SubResource("AtlasTexture_nhviw")
+texture_progress_offset = Vector2(750.315, 3.475)
+tint_progress = Color(0.5025635, 1, 0.36328125, 1)
+
+[node name="Label" type="Label" parent="Hud/level_progress_bar" unique_id=1475059741]
+layout_mode = 1
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-offset_left = -576.0
-offset_bottom = 27.0
+anchor_bottom = 1.0
+offset_left = 448.0
+offset_top = -60.0
+offset_right = 628.0
+offset_bottom = 4.0
 grow_horizontal = 0
-show_percentage = false
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_lg6ro")
+theme_override_font_sizes/font_size = 64
+text = "Progresso"
 
 [node name="Point1" parent="." unique_id=558440410 instance=ExtResource("3_cgcoo")]
 position = Vector2(200, 361)
 minigame_scenes = Array[PackedScene]([ExtResource("5_omqrc")])
 
-[node name="MinigameLayer" type="CanvasLayer" parent="." unique_id=1935992020]
-
 [node name="Point2" parent="." unique_id=236871632 instance=ExtResource("3_cgcoo")]
 position = Vector2(401, 224)
+minigame_scenes = Array[PackedScene]([ExtResource("5_omqrc")])
+
+[node name="MinigameLayer" type="CanvasLayer" parent="." unique_id=1935992020]
+
+[node name="Point3" parent="." unique_id=514653821 instance=ExtResource("3_cgcoo")]
+position = Vector2(889, 288)
 minigame_scenes = Array[PackedScene]([ExtResource("5_omqrc")])
