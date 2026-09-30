@@ -8,42 +8,6 @@
 [ext_resource type="FontFile" uid="uid://ce7hwvbr6rbep" path="res://fonts/GrapeSoda.ttf" id="5_lg6ro"]
 [ext_resource type="PackedScene" uid="uid://u1xu38as3u6o" path="res://assets/scenes/minigames/minigame_a/minigame_test.tscn" id="5_omqrc"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ejomc"]
-atlas = ExtResource("4_cgs8v")
-region = Rect2(512, 512, 256, 256)
-
-[sub_resource type="Curve" id="Curve_osicj"]
-_limits = [-1.0, 1.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.16393444, -0.30337083), 0.0, 0.0, 0, 0, Vector2(0.41803282, 0.6741574), 0.0, 0.0, 0, 0, Vector2(0.7295082, -0.21348321), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 5
-
-[sub_resource type="Curve" id="Curve_u840f"]
-_data = [Vector2(0, 0.06741583), 0.0, 0.0, 0, 0, Vector2(0.05586593, 0.3370787), 0.0, 0.0, 0, 0, Vector2(0.13934427, 0.75280905), 0.0, 0.0, 0, 0, Vector2(0.22540984, 0.7191012), 0.0, 0.0, 0, 0, Vector2(0.41393447, 0.8651686), 0.0, 0.0, 0, 0, Vector2(0.7459017, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.84426236, 0.6741574), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 8
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_3c2fn"]
-curve_x = SubResource("Curve_osicj")
-curve_y = SubResource("Curve_u840f")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fdm2o"]
-lifetime_randomness = 0.5
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(600, 1, 1)
-angle_min = 1.0728835e-05
-angle_max = 1.0728835e-05
-direction = Vector3(50, 50, 0)
-spread = 180.0
-directional_velocity_min = 49.99998
-directional_velocity_max = 75.0
-directional_velocity_curve = SubResource("CurveXYZTexture_3c2fn")
-gravity = Vector3(0, 4, 0)
-scale_min = 0.099999994
-scale_max = 0.14999999
-turbulence_enabled = true
-turbulence_noise_strength = 10.0
-turbulence_noise_scale = 30.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_fdm2o"]
 atlas = ExtResource("4_cgs8v")
 region = Rect2(768, 0, 1280, 384)
@@ -65,13 +29,6 @@ level_data = ExtResource("2_pmnoc")
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=876693578]
 script = ExtResource("3_pmnoc")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Hud" unique_id=639251807]
-position = Vector2(576, -64)
-amount = 50
-texture = SubResource("AtlasTexture_ejomc")
-lifetime = 30.0
-process_material = SubResource("ParticleProcessMaterial_fdm2o")
 
 [node name="time_limit_bar" type="TextureProgressBar" parent="Hud" unique_id=1042433875]
 anchors_preset = 5
@@ -105,11 +62,6 @@ offset_right = 90.0
 offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.98828125, 0.60784364, 0.069488525, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 5
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 3
 theme_override_fonts/font = ExtResource("5_lg6ro")
 theme_override_font_sizes/font_size = 96
 text = "999"
@@ -125,10 +77,6 @@ offset_top = -188.0
 offset_right = 184.0
 offset_bottom = -124.0
 grow_vertical = 0
-theme_override_colors/font_shadow_color = Color(0.14509805, 0.05490196, 0.047058824, 1)
-theme_override_constants/shadow_offset_x = 5
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 3
 theme_override_fonts/font = ExtResource("5_lg6ro")
 theme_override_font_sizes/font_size = 64
 text = "Tempo "
@@ -161,10 +109,6 @@ offset_right = 628.0
 offset_bottom = 4.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_colors/font_shadow_color = Color(0.14509805, 0.05490196, 0.047058824, 1)
-theme_override_constants/shadow_offset_x = 5
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 3
 theme_override_fonts/font = ExtResource("5_lg6ro")
 theme_override_font_sizes/font_size = 64
 text = "Progresso"
