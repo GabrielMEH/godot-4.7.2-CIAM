@@ -1,44 +1,53 @@
 class_name Point
 extends Area2D
 
-@export var sprite: Sprite2D
+enum State { GREEN, YELLOW, RED }
+
+@export var inner_circle: Sprite2D
+@export var icon: Sprite2D
 @export var collision_shape: CollisionShape2D
 @export var timer_ring: TextureProgressBar
-@export var minigame_scenes: Array[PackedScene] = []
+@export var minigames_yellow: Array[PackedScene] = []
+@export var minigames_red: Array[PackedScene] = []
 
 var level: Node2D
 var minigame_layer: CanvasLayer
 var current_minigame: Node = null
+var icon_tween: Tween
+var icon_base_scale_x: float
 
-signal green_point()
-var green_sent: bool = false
+
 signal yellow_point()
-var yellow_sent: bool = false
 signal red_point()
-var red_sent: bool = false
 
 var is_running: bool = false
 var is_free: bool = true
+var state: State = State.GREEN
+
 var active_timer: float = 0.0
 var active_duration: float = 0.0
 
 func _ready() -> void:
-	collision_shape.disabled = true
-	sprite.visible = false
-	timer_ring.visible = false
 	is_running = false
 	level = get_parent()
 	level.running_changed.connect(change_running)
 	minigame_layer = level.get_node("MinigameLayer")
+	icon_base_scale_x = icon.scale.x
 
 	input_event.connect(_on_input_event)
 
+	_set_green()
+
 func _process(delta: float) -> void:
-	if is_running and not is_free and active_timer > 0.0:
-		active_timer -= delta
-		active_timer = max(active_timer, 0.0)
-		timer_ring.value = active_timer
-		_update_color()
+	if not is_running or is_free or state == State.GREEN:
+		return
+
+	active_timer -= delta
+	active_timer = max(active_timer, 0.0)
+	timer_ring.value = active_timer
+
+	if state == State.YELLOW and active_timer <= active_duration / 2.0:
+		_start_red()
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if is_free:
@@ -47,19 +56,26 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		_on_clicked()
 
 func _on_clicked() -> void:
-	level.change_running(false)
-	_spawn_minigame()
-	print("%s foi clicado!" % name)
+	match state:
+		State.GREEN:
+			pass  # não faz nada
+		State.YELLOW:
+			_spawn_minigame(minigames_yellow)
+		State.RED:
+			_spawn_minigame(minigames_red)
 
-func _spawn_minigame() -> void:
-	if minigame_scenes.is_empty():
-		push_warning("Nenhum minigame configurado em %s" % name)
+func _spawn_minigame(scenes: Array[PackedScene]) -> void:
+	if scenes.is_empty():
+		push_warning("Nenhum minigame configurado para este estado em %s" % name)
 		return
 
-	var scene: PackedScene = minigame_scenes.pick_random()
+	level.change_running(false)
+
+	var scene: PackedScene = scenes.pick_random()
 	current_minigame = scene.instantiate()
 	minigame_layer.add_child(current_minigame)
 	current_minigame.minigame_finished.connect(_on_minigame_finished)
+	print("%s foi clicado!" % name)
 
 func _on_minigame_finished(success: bool, value: float) -> void:
 	current_minigame.queue_free()
@@ -73,16 +89,20 @@ func _on_minigame_finished(success: bool, value: float) -> void:
 		level.add_progress(-value)
 
 	level.change_running(true)
-	_deactivate()
-
-func _deactivate() -> void:
 	is_free = true
-	green_sent = false
-	yellow_sent = false
-	red_sent = false
-	sprite.visible = false
-	timer_ring.visible = false
+	_set_green()
+
+func _set_green() -> void:
+	is_free = true
+	state = State.GREEN
+	inner_circle.visible = true
+	inner_circle.modulate = Color.GREEN
+	timer_ring.tint_progress = Color.GREEN
+	timer_ring.max_value = 1.0
+	timer_ring.value = 1.0
 	collision_shape.set_deferred("disabled", true)
+	change_icon(2,0)
+	
 
 func activate(duration: float) -> void:
 	is_free = false
@@ -90,32 +110,38 @@ func activate(duration: float) -> void:
 	active_duration = duration
 	active_timer = duration
 	collision_shape.disabled = false
-	sprite.visible = true
-	timer_ring.visible = true
 	timer_ring.max_value = duration
 	timer_ring.value = duration
-	_update_color()
+	_start_yellow()
 
-func _update_color() -> void:
-	var third: float = active_duration / 3.0
-	if active_timer > third * 2.0:
-		if green_sent == false:
-			green_point.emit()
-			green_sent = true
-		sprite.modulate = Color.GREEN
-		timer_ring.tint_progress = Color.GREEN
-	elif active_timer > third:
-		if yellow_sent == false:
-			yellow_point.emit()
-			yellow_sent = true
-		sprite.modulate = Color.YELLOW
-		timer_ring.tint_progress = Color.YELLOW
-	else:
-		if red_sent == false:
-			red_point.emit()
-			red_sent = true
-		sprite.modulate = Color.RED
-		timer_ring.tint_progress = Color.RED
+func _start_yellow() -> void:
+	state = State.YELLOW
+	var tween = get_tree().create_tween()
+	tween.set_parallel(true)
+	tween.parallel().tween_property(inner_circle, "modulate", Color.YELLOW, 1.0)
+	tween.parallel().tween_property(timer_ring, "tint_progress", Color.YELLOW, 1.0)
+	yellow_point.emit()
+	change_icon(1,0)
+
+func _start_red() -> void:
+	state = State.RED
+	var tween = get_tree().create_tween()
+	tween.set_parallel(true)
+	tween.parallel().tween_property(inner_circle, "modulate", Color.ORANGE_RED, 1.0)
+	tween.parallel().tween_property(timer_ring, "tint_progress", Color.ORANGE_RED, 1.0)
+	red_point.emit()
+	change_icon(0,0)
 
 func change_running(value: bool):
 	is_running = value
+
+func change_icon(column: int, row: int) -> void:
+	if icon_tween:
+			icon_tween.kill()
+	icon_tween = create_tween()
+	icon_tween.tween_property(icon, "scale:x", 0.0, 0.2)
+	icon_tween.tween_callback(show_icon_at.bind(column, row))
+	icon_tween.tween_property(icon, "scale:x", icon_base_scale_x, 0.2)
+	
+func show_icon_at(column: int, row: int) -> void:
+	icon.frame_coords = Vector2i(column, row)

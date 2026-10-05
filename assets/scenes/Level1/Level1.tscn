@@ -18,12 +18,20 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.16393444, -0.30337083), 0.0, 0
 point_count = 5
 
 [sub_resource type="Curve" id="Curve_u840f"]
-_data = [Vector2(0, 0.06741583), 0.0, 0.0, 0, 0, Vector2(0.05586593, 0.3370787), 0.0, 0.0, 0, 0, Vector2(0.13934427, 0.75280905), 0.0, 0.0, 0, 0, Vector2(0.22540984, 0.7191012), 0.0, 0.0, 0, 0, Vector2(0.41393447, 0.8651686), 0.0, 0.0, 0, 0, Vector2(0.7459017, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.84426236, 0.6741574), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 8
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -0.730337), 0.0, 0.0, 0, 0, Vector2(0.050279334, -0.14606738), 0.0, 0.0, 0, 0, Vector2(0.1340782, -0.32584274), 0.0, 0.0, 0, 0, Vector2(0.23463687, -0.6179775), 0.0, 0.0, 0, 0, Vector2(0.32960895, -0.25842702), 0.0, 0.0, 0, 0, Vector2(0.5027933, -0.84269655), 0.0, 0.0, 0, 0, Vector2(0.6201117, -0.28089893), 0.0, 0.0, 0, 0, Vector2(0.78212285, -0.6179775), 0.0, 0.0, 0, 0, Vector2(0.9664804, -0.39325845), 0.0, 0.0, 0, 0, Vector2(1, -0.1685394), 0.0, 0.0, 0, 0]
+point_count = 10
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_3c2fn"]
 curve_x = SubResource("Curve_osicj")
 curve_y = SubResource("Curve_u840f")
+
+[sub_resource type="Curve" id="Curve_lg6ro"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.1310022, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3f6xy"]
+curve = SubResource("Curve_lg6ro")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fdm2o"]
 lifetime_randomness = 0.5
@@ -32,14 +40,16 @@ emission_shape = 3
 emission_box_extents = Vector3(600, 1, 1)
 angle_min = 1.0728835e-05
 angle_max = 1.0728835e-05
-direction = Vector3(50, 50, 0)
+direction = Vector3(50, -50, 0)
 spread = 180.0
 directional_velocity_min = 49.99998
 directional_velocity_max = 75.0
 directional_velocity_curve = SubResource("CurveXYZTexture_3c2fn")
-gravity = Vector3(0, 4, 0)
+gravity = Vector3(0, -0.1, 0)
 scale_min = 0.099999994
 scale_max = 0.14999999
+scale_curve = SubResource("CurveTexture_3f6xy")
+scale_over_velocity_max = 1.0
 turbulence_enabled = true
 turbulence_noise_strength = 10.0
 turbulence_noise_scale = 30.0
@@ -66,11 +76,11 @@ level_data = ExtResource("2_pmnoc")
 [node name="Hud" type="CanvasLayer" parent="." unique_id=876693578]
 script = ExtResource("3_pmnoc")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Hud" unique_id=639251807]
-position = Vector2(576, -64)
-amount = 50
+[node name="Blaze_effect" type="GPUParticles2D" parent="Hud" unique_id=639251807]
+position = Vector2(319, 700)
+amount = 60
 texture = SubResource("AtlasTexture_ejomc")
-lifetime = 30.0
+lifetime = 45.0
 process_material = SubResource("ParticleProcessMaterial_fdm2o")
 
 [node name="time_limit_bar" type="TextureProgressBar" parent="Hud" unique_id=1042433875]
@@ -170,15 +180,18 @@ theme_override_font_sizes/font_size = 64
 text = "Progresso"
 
 [node name="Point1" parent="." unique_id=558440410 instance=ExtResource("3_cgcoo")]
-position = Vector2(200, 361)
-minigame_scenes = Array[PackedScene]([ExtResource("5_omqrc")])
+position = Vector2(253, 361)
+minigames_yellow = Array[PackedScene]([ExtResource("5_omqrc")])
+minigames_red = Array[PackedScene]([ExtResource("5_omqrc")])
 
-[node name="Point2" parent="." unique_id=236871632 instance=ExtResource("3_cgcoo")]
-position = Vector2(401, 224)
-minigame_scenes = Array[PackedScene]([ExtResource("5_omqrc")])
+[node name="Point2" parent="." unique_id=791976223 instance=ExtResource("3_cgcoo")]
+position = Vector2(575, 361)
+minigames_yellow = Array[PackedScene]([ExtResource("5_omqrc")])
+minigames_red = Array[PackedScene]([ExtResource("5_omqrc")])
 
-[node name="Point3" parent="." unique_id=514653821 instance=ExtResource("3_cgcoo")]
-position = Vector2(889, 288)
-minigame_scenes = Array[PackedScene]([ExtResource("5_omqrc")])
+[node name="Point3" parent="." unique_id=2101357343 instance=ExtResource("3_cgcoo")]
+position = Vector2(857, 361)
+minigames_yellow = Array[PackedScene]([ExtResource("5_omqrc")])
+minigames_red = Array[PackedScene]([ExtResource("5_omqrc")])
 
 [node name="MinigameLayer" type="CanvasLayer" parent="." unique_id=1935992020]

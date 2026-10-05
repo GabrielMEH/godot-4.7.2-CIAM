@@ -47,6 +47,7 @@ position = Vector2(346, 102)
 script = ExtResource("4_77opj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TrashCan" unique_id=1923308030]
+position = Vector2(0, 19)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_fdm2o")
 

@@ -47,10 +47,10 @@ func process_point(delta: float) -> void:
 		point_cooldown_timer -= delta
 		point_cooldown_timer = max(point_cooldown_timer, 0)
 		if point_cooldown_timer == 0:
+			point_cooldown_timer = level_data.point_cooldown
 			var free_point = get_free_point()
 			if free_point:
 				free_point.activate(level_data.point_active_duration)
-				point_cooldown_timer = level_data.point_cooldown
 				print(free_point.name + " ativado")
 
 #pega pontos livres
