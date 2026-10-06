@@ -16,6 +16,8 @@ var progress_limit_curr: float
 #pontos do nível, pontos filhos do node Level1
 var points: Array[Node] = []
 
+const GAME_OVER_SCENE := preload("res://assets/scenes/gameover/GameOver.tscn")
+
 #configura o nível
 func _ready() -> void:
 	randomize()
@@ -70,7 +72,8 @@ func time_up() -> void:
 	is_running = false
 	print("Time's up!")
 	time_expired.emit()
-	get_tree().change_scene_to_file("res://assets/scenes/main_menu/main_menu.tscn")
+	var game_over := GAME_OVER_SCENE.instantiate()
+	add_child(game_over)
 
 func change_running(value: bool):
 	is_running = value
