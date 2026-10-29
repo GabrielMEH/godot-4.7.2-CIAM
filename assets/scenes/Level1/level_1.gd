@@ -12,11 +12,24 @@ var point_cooldown_timer: float
 var time_limit_timer: float
 var progress_limit: float
 var progress_limit_curr: float
+var progress_negative: int
+var time_left: int
+@onready var ember_particle: CPUParticles2D = $Hud/EmberParticle
+var reds: int
+var finished: bool = false  # true quando o nível acabou (vitória ou derrota)
+
 
 #pontos do nível, pontos filhos do node Level1
 var points: Array[Node] = []
 
 const GAME_OVER_SCENE := preload("res://assets/scenes/gameover/GameOver.tscn")
+# ajuste o caminho para onde você salvar a cena
+const LEVEL_COMPLETE_SCENE := preload("res://assets/scenes/level_complete/level_complete.tscn")
+
+# pontuação final = BASE_SCORE + (segundos restantes * TIME_BONUS_PER_SECOND) - (erros * NEGATIVE_PENALTY)
+const BASE_SCORE := 1000
+const TIME_BONUS_PER_SECOND := 10
+const NEGATIVE_PENALTY := 100
 
 #configura o nível
 func _ready() -> void:
@@ -28,8 +41,13 @@ func _ready() -> void:
 	progress_updated.emit(0, level_data.progress_required)
 	point_cooldown_timer = level_data.point_cooldown
 	points = get_tree().get_nodes_in_group("points")
+	
+	reds = 0
+	process_ember()
 
 func _process(delta: float) -> void:
+	if finished:
+		return
 	process_time(delta)
 	process_point(delta)
 
@@ -69,6 +87,7 @@ func time_change(value: float) -> void:
 
 #acabou o tempo
 func time_up() -> void:
+	finished = true
 	is_running = false
 	print("Time's up!")
 	time_expired.emit()
@@ -80,9 +99,41 @@ func change_running(value: bool):
 	running_changed.emit(value)
 	
 func add_progress(value: float) -> void:
+	if finished:
+		return
+	if value < 0:
+		progress_negative = progress_negative + 1
 	if progress_limit_curr + value >= level_data.progress_required:
 		progress_limit_curr = level_data.progress_required
 		progress_finished.emit()
+		level_complete()
 	else:
 		progress_limit_curr += value
+		if progress_limit_curr < 0:
+			progress_limit = 0
 		progress_updated.emit(progress_limit_curr, level_data.progress_required)
+
+#nível completo: calcula a pontuação e mostra a tela de fim de nível
+func level_complete() -> void:
+	finished = true
+	is_running = false
+
+	var time_bonus := int(time_limit_timer) * TIME_BONUS_PER_SECOND
+	var penalty := progress_negative * NEGATIVE_PENALTY
+	var final_score := maxi(BASE_SCORE + time_bonus - penalty, 0)
+
+	var screen := LEVEL_COMPLETE_SCENE.instantiate() as LevelCompleteScreen
+	add_child(screen)
+	screen.setup(time_bonus, penalty, final_score)
+	get_tree().paused = true
+
+func add_red() -> void:
+	reds = reds + 1
+	process_ember()
+	
+func remove_red() -> void:
+	reds = reds - 1
+	process_ember()
+
+func process_ember() -> void:
+	ember_particle.emitting = reds > 0

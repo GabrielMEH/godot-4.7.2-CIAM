@@ -10,6 +10,9 @@ enum State { GREEN, YELLOW, RED }
 @export var minigames_yellow: Array[PackedScene] = []
 @export var minigames_red: Array[PackedScene] = []
 
+@onready var smoke_particle: CPUParticles2D = $SmokeParticle
+@onready var ember_particle: CPUParticles2D = $EmberParticle
+
 var level: Node2D
 var minigame_layer: CanvasLayer
 var current_minigame: Node = null
@@ -81,20 +84,24 @@ func _on_minigame_finished(success: bool, value: float) -> void:
 	current_minigame.queue_free()
 	current_minigame = null
 
+	level.change_running(true)
+
 	if success:
 		print("%s: minigame concluído!" % name)
 		level.add_progress(value)
+		is_free = true
+		_set_green()
 	else:
 		print("%s: minigame fracassado!" % name)
 		level.add_progress(-value)
 
-	level.change_running(true)
-	is_free = true
-	_set_green()
-
 func _set_green() -> void:
+	if state == State.RED:
+		level.remove_red()
 	is_free = true
 	state = State.GREEN
+	smoke_particle.emitting = false
+	ember_particle.emitting = false
 	inner_circle.visible = true
 	inner_circle.modulate = Color.GREEN
 	timer_ring.tint_progress = Color.GREEN
@@ -124,7 +131,10 @@ func _start_yellow() -> void:
 	change_icon(1,0)
 
 func _start_red() -> void:
+	level.add_red()
 	state = State.RED
+	smoke_particle.emitting = true
+	ember_particle.emitting = true
 	var tween = get_tree().create_tween()
 	tween.set_parallel(true)
 	tween.parallel().tween_property(inner_circle, "modulate", Color.ORANGE_RED, 1.0)

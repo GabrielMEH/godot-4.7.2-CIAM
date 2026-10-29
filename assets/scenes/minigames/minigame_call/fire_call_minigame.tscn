@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://dfwjbbqcpqbd1"]
+
+[ext_resource type="Script" uid="uid://dn0pg4pgfcjhe" path="res://fire_call_minigame.gd" id="1_n61yo"]
+[ext_resource type="Texture2D" uid="uid://bisynj7k4uhyl" path="res://assets.png" id="2_svm36"]
+[ext_resource type="AudioStream" uid="uid://d4goy23i0mfcj" path="res://audio/Error1.wav" id="3_svm36"]
+[ext_resource type="AudioStream" uid="uid://b1ugq23726oty" path="res://audio/click.wav" id="4_tlrhy"]
+[ext_resource type="AudioStream" uid="uid://bwxn8wy7xw7v0" path="res://audio/gta_ring.wav" id="5_hiylt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdm2o"]
+atlas = ExtResource("2_svm36")
+region = Rect2(0, 768, 512, 768)
+
+[node name="FireCallMinigame" type="Node2D" unique_id=146143458]
+script = ExtResource("1_n61yo")
+
+[node name="background" type="NinePatchRect" parent="." unique_id=1726867962]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -413.30063
+offset_top = -307.75
+offset_right = 413.30063
+offset_bottom = 307.75
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("2_svm36")
+region_rect = Rect2(512, 640, 128, 128)
+patch_margin_left = 18
+patch_margin_top = 17
+patch_margin_right = 17
+patch_margin_bottom = 17
+
+[node name="TimeLimit" type="Timer" parent="." unique_id=1475595370]
+
+[node name="TimerLabel" type="Label" parent="." unique_id=454098429]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -280.0
+offset_right = 20.0
+offset_bottom = -257.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Cellphone" type="Sprite2D" parent="." unique_id=225091628]
+position = Vector2(-2, 8)
+scale = Vector2(0.6542969, 0.6542969)
+texture = SubResource("AtlasTexture_fdm2o")
+
+[node name="DisplayLabel" type="Label" parent="Cellphone" unique_id=2103911064]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.81195
+offset_top = -591.8567
+offset_right = -232.81194
+offset_bottom = -503.85672
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 44
+
+[node name="Keypad" type="GridContainer" parent="Cellphone" unique_id=886609179]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -364.4746
+offset_top = -442.0776
+offset_right = -146.47461
+offset_bottom = -150.0776
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="Button1" type="Button" parent="Cellphone/Keypad" unique_id=560341488]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "1"
+
+[node name="Button2" type="Button" parent="Cellphone/Keypad" unique_id=88623894]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "2"
+
+[node name="Button3" type="Button" parent="Cellphone/Keypad" unique_id=387882153]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "3"
+
+[node name="Button4" type="Button" parent="Cellphone/Keypad" unique_id=786380719]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "4"
+
+[node name="Button5" type="Button" parent="Cellphone/Keypad" unique_id=792108185]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "5"
+
+[node name="Button6" type="Button" parent="Cellphone/Keypad" unique_id=1683068726]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "6"
+
+[node name="Button7" type="Button" parent="Cellphone/Keypad" unique_id=406577526]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "7"
+
+[node name="Button8" type="Button" parent="Cellphone/Keypad" unique_id=454467925]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "8"
+
+[node name="Button9" type="Button" parent="Cellphone/Keypad" unique_id=1727493417]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "9"
+
+[node name="ButtonDel" type="Button" parent="Cellphone/Keypad" unique_id=308908547]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "⌫"
+
+[node name="Button0" type="Button" parent="Cellphone/Keypad" unique_id=1567399804]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="ButtonCall" type="Button" parent="Cellphone/Keypad" unique_id=1716232806]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "📞"
+
+[node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=607201083]
+stream = ExtResource("3_svm36")
+
+[node name="KeySound" type="AudioStreamPlayer" parent="." unique_id=650078051]
+stream = ExtResource("4_tlrhy")
+
+[node name="RingingSound" type="AudioStreamPlayer" parent="." unique_id=1013701991]
+stream = ExtResource("5_hiylt")

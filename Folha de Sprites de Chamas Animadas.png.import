@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bisynj7k4uhyl"
-path="res://.godot/imported/Image #2(2).png-d5254dbdd99c5a5cd3ebe66cab7d887d.ctex"
+uid="uid://cq88jnm1518ls"
+path="res://.godot/imported/Folha de Sprites de Chamas Animadas.png-1ce449b462c7d67c8dd2a2570557713a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Image #2(2).png"
-dest_files=["res://.godot/imported/Image #2(2).png-d5254dbdd99c5a5cd3ebe66cab7d887d.ctex"]
+source_file="res://Folha de Sprites de Chamas Animadas.png"
+dest_files=["res://.godot/imported/Folha de Sprites de Chamas Animadas.png-1ce449b462c7d67c8dd2a2570557713a.ctex"]
 
 [params]
 

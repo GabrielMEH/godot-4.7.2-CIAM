@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://4666mh1hu2tb"]
+
+[ext_resource type="Script" uid="uid://bvbn4g8vbinn" path="res://assets/scenes/level_complete/level_complete.gd" id="1_t8kgq"]
+
+[node name="LevelComplete" type="CanvasLayer" unique_id=1661026596]
+script = ExtResource("1_t8kgq")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1019903221]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1880278359]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.0
+offset_top = -69.5
+offset_right = 139.0
+offset_bottom = 69.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=2101128888]
+layout_mode = 2
+text = "Nível Completo!"
+horizontal_alignment = 1
+
+[node name="TimeBonusLabel" type="Label" parent="VBoxContainer" unique_id=306274426]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="PenaltyLabel" type="Label" parent="VBoxContainer" unique_id=593420199]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="VBoxContainer" unique_id=1515141864]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="VBoxContainer" unique_id=754947403]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="RetryButton" type="Button" parent="VBoxContainer/Buttons" unique_id=433521551]
+layout_mode = 2
+text = "Próximo Nível"
+
+[node name="MenuButton" type="Button" parent="VBoxContainer/Buttons" unique_id=1257785938]
+layout_mode = 2
+text = "Voltar para o Menu"

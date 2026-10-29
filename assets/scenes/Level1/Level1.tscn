@@ -4,55 +4,17 @@
 [ext_resource type="Resource" uid="uid://cg381vcasw0ba" path="res://assets/scenes/leveldata/level_01.tres" id="2_pmnoc"]
 [ext_resource type="PackedScene" uid="uid://dvxoyqqygacuy" path="res://assets/scenes/point.tscn" id="3_cgcoo"]
 [ext_resource type="Script" uid="uid://dllfoqvgc5xlm" path="res://assets/scenes/Level1/hud.gd" id="3_pmnoc"]
-[ext_resource type="Texture2D" uid="uid://bisynj7k4uhyl" path="res://Image #2(2).png" id="4_cgs8v"]
+[ext_resource type="Texture2D" uid="uid://bisynj7k4uhyl" path="res://assets.png" id="4_cgs8v"]
 [ext_resource type="FontFile" uid="uid://ce7hwvbr6rbep" path="res://fonts/GrapeSoda.ttf" id="5_lg6ro"]
 [ext_resource type="PackedScene" uid="uid://u1xu38as3u6o" path="res://assets/scenes/minigames/minigame_a/minigame_test.tscn" id="5_omqrc"]
+[ext_resource type="AudioStream" uid="uid://c5glm1vtet475" path="res://audio/MMX3_22.wav" id="6_ejomc"]
+[ext_resource type="AudioStream" uid="uid://7d8vfgkwm8pn" path="res://audio/33 - MMX - Energy Tank Full.wav" id="7_ooaxq"]
+[ext_resource type="PackedScene" uid="uid://dfwjbbqcpqbd1" path="res://assets/scenes/minigames/minigame_call/fire_call_minigame.tscn" id="8_3f6xy"]
+[ext_resource type="AudioStream" uid="uid://ctl0qgm3ekhpl" path="res://audio/ROCK_X5_00716.wav" id="8_kr3e0"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ejomc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_osicj"]
 atlas = ExtResource("4_cgs8v")
-region = Rect2(512, 512, 256, 256)
-
-[sub_resource type="Curve" id="Curve_osicj"]
-_limits = [-1.0, 1.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.16393444, -0.30337083), 0.0, 0.0, 0, 0, Vector2(0.41803282, 0.6741574), 0.0, 0.0, 0, 0, Vector2(0.7295082, -0.21348321), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 5
-
-[sub_resource type="Curve" id="Curve_u840f"]
-_limits = [-1.0, 1.0, 0.0, 1.0]
-_data = [Vector2(0, -0.730337), 0.0, 0.0, 0, 0, Vector2(0.050279334, -0.14606738), 0.0, 0.0, 0, 0, Vector2(0.1340782, -0.32584274), 0.0, 0.0, 0, 0, Vector2(0.23463687, -0.6179775), 0.0, 0.0, 0, 0, Vector2(0.32960895, -0.25842702), 0.0, 0.0, 0, 0, Vector2(0.5027933, -0.84269655), 0.0, 0.0, 0, 0, Vector2(0.6201117, -0.28089893), 0.0, 0.0, 0, 0, Vector2(0.78212285, -0.6179775), 0.0, 0.0, 0, 0, Vector2(0.9664804, -0.39325845), 0.0, 0.0, 0, 0, Vector2(1, -0.1685394), 0.0, 0.0, 0, 0]
-point_count = 10
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_3c2fn"]
-curve_x = SubResource("Curve_osicj")
-curve_y = SubResource("Curve_u840f")
-
-[sub_resource type="Curve" id="Curve_lg6ro"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.1310022, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_3f6xy"]
-curve = SubResource("Curve_lg6ro")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fdm2o"]
-lifetime_randomness = 0.5
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(600, 1, 1)
-angle_min = 1.0728835e-05
-angle_max = 1.0728835e-05
-direction = Vector3(50, -50, 0)
-spread = 180.0
-directional_velocity_min = 49.99998
-directional_velocity_max = 75.0
-directional_velocity_curve = SubResource("CurveXYZTexture_3c2fn")
-gravity = Vector3(0, -0.1, 0)
-scale_min = 0.099999994
-scale_max = 0.14999999
-scale_curve = SubResource("CurveTexture_3f6xy")
-scale_over_velocity_max = 1.0
-turbulence_enabled = true
-turbulence_noise_strength = 10.0
-turbulence_noise_scale = 30.0
+region = Rect2(640, 640, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fdm2o"]
 atlas = ExtResource("4_cgs8v")
@@ -69,6 +31,14 @@ region = Rect2(777.8137, 384, 515.85156, 256)
 atlas = ExtResource("4_cgs8v")
 region = Rect2(1524.373, 384, 512.4352, 256)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr3e0"]
+atlas = ExtResource("4_cgs8v")
+region = Rect2(768, 640, 256, 256)
+
+[sub_resource type="Curve" id="Curve_18lw8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Level1" type="Node2D" unique_id=1535856123]
 script = ExtResource("1_6l8r6")
 level_data = ExtResource("2_pmnoc")
@@ -76,12 +46,14 @@ level_data = ExtResource("2_pmnoc")
 [node name="Hud" type="CanvasLayer" parent="." unique_id=876693578]
 script = ExtResource("3_pmnoc")
 
-[node name="Blaze_effect" type="GPUParticles2D" parent="Hud" unique_id=639251807]
-position = Vector2(319, 700)
-amount = 60
-texture = SubResource("AtlasTexture_ejomc")
-lifetime = 45.0
-process_material = SubResource("ParticleProcessMaterial_fdm2o")
+[node name="Danger_overlay" type="TextureRect" parent="Hud" unique_id=1211215350]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(573.585, 0)
+texture = SubResource("AtlasTexture_osicj")
 
 [node name="time_limit_bar" type="TextureProgressBar" parent="Hud" unique_id=1042433875]
 anchors_preset = 5
@@ -143,6 +115,15 @@ theme_override_fonts/font = ExtResource("5_lg6ro")
 theme_override_font_sizes/font_size = 64
 text = "Tempo "
 
+[node name="PositiveAudio" type="AudioStreamPlayer" parent="Hud" unique_id=1595292122]
+stream = ExtResource("6_ejomc")
+
+[node name="PositiveAudio2" type="AudioStreamPlayer" parent="Hud" unique_id=837035286]
+stream = ExtResource("7_ooaxq")
+
+[node name="NegativeAudio" type="AudioStreamPlayer" parent="Hud" unique_id=1477566448]
+stream = ExtResource("8_kr3e0")
+
 [node name="level_progress_bar" type="TextureProgressBar" parent="Hud" unique_id=194317172]
 anchors_preset = 5
 anchor_left = 0.5
@@ -156,7 +137,6 @@ size_flags_horizontal = 4
 step = 0.1
 texture_progress = SubResource("AtlasTexture_nhviw")
 texture_progress_offset = Vector2(750.315, 3.475)
-tint_progress = Color(0.5025635, 1, 0.36328125, 1)
 
 [node name="Label" type="Label" parent="Hud/level_progress_bar" unique_id=1475059741]
 layout_mode = 1
@@ -179,19 +159,52 @@ theme_override_fonts/font = ExtResource("5_lg6ro")
 theme_override_font_sizes/font_size = 64
 text = "Progresso"
 
+[node name="FloatingText" type="Label" parent="Hud/level_progress_bar" unique_id=1429404488]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 976.0
+offset_top = -16.0
+offset_right = 1086.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_lg6ro")
+theme_override_font_sizes/font_size = 96
+horizontal_alignment = 1
+
+[node name="EmberParticle" type="CPUParticles2D" parent="Hud" unique_id=56912258]
+position = Vector2(576, 656)
+amount = 30
+texture = SubResource("AtlasTexture_kr3e0")
+lifetime = 20.0
+lifetime_randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(550, 0)
+direction = Vector2(0.5, -1)
+gravity = Vector2(0, -0.2)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_18lw8")
+
 [node name="Point1" parent="." unique_id=558440410 instance=ExtResource("3_cgcoo")]
 position = Vector2(253, 361)
 minigames_yellow = Array[PackedScene]([ExtResource("5_omqrc")])
-minigames_red = Array[PackedScene]([ExtResource("5_omqrc")])
+minigames_red = Array[PackedScene]([ExtResource("8_3f6xy")])
 
 [node name="Point2" parent="." unique_id=791976223 instance=ExtResource("3_cgcoo")]
 position = Vector2(575, 361)
 minigames_yellow = Array[PackedScene]([ExtResource("5_omqrc")])
-minigames_red = Array[PackedScene]([ExtResource("5_omqrc")])
+minigames_red = Array[PackedScene]([ExtResource("8_3f6xy")])
 
 [node name="Point3" parent="." unique_id=2101357343 instance=ExtResource("3_cgcoo")]
 position = Vector2(857, 361)
 minigames_yellow = Array[PackedScene]([ExtResource("5_omqrc")])
-minigames_red = Array[PackedScene]([ExtResource("5_omqrc")])
+minigames_red = Array[PackedScene]([ExtResource("8_3f6xy")])
 
 [node name="MinigameLayer" type="CanvasLayer" parent="." unique_id=1935992020]

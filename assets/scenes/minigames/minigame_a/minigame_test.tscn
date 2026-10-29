@@ -1,19 +1,21 @@
 [gd_scene format=3 uid="uid://u1xu38as3u6o"]
 
 [ext_resource type="Script" uid="uid://2acjfaxwahiq" path="res://assets/scenes/minigames/minigame_a.gd" id="1_o5olm"]
-[ext_resource type="Texture2D" uid="uid://d3juiqrevec68" path="res://icon.svg" id="2_1efl3"]
 [ext_resource type="Script" uid="uid://r4yfs5hln74s" path="res://assets/scenes/minigames/minigame_a/trash.gd" id="2_4tnbk"]
-[ext_resource type="Texture2D" uid="uid://bisynj7k4uhyl" path="res://Image #2(2).png" id="3_77opj"]
+[ext_resource type="Texture2D" uid="uid://bisynj7k4uhyl" path="res://assets.png" id="3_77opj"]
 [ext_resource type="Script" uid="uid://b4m5pn6gbosu7" path="res://assets/scenes/minigames/minigame_a/trash_can.gd" id="4_77opj"]
+[ext_resource type="AudioStream" uid="uid://d4goy23i0mfcj" path="res://audio/Error1.wav" id="5_dmp11"]
+[ext_resource type="AudioStream" uid="uid://d2vptk0ktn0pp" path="res://audio/paper-5.mp3" id="6_xxica"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_osicj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_77opj"]
 atlas = ExtResource("3_77opj")
 region = Rect2(0, 512, 256, 256)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fdm2o"]
-radius = 44.04543
+radius = 56.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdm2o"]
+size = Vector2(28.5, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fdm2o"]
 atlas = ExtResource("3_77opj")
@@ -23,31 +25,51 @@ region = Rect2(256, 512, 256, 256)
 
 [node name="minigame_a" type="Node2D" unique_id=1340375373]
 script = ExtResource("1_o5olm")
+success_time_bonus = 20
+failure_time_penalty = 5
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=485007180]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_1efl3")
-region_enabled = true
-region_rect = Rect2(0, 0, 1400, 800)
+[node name="background" type="NinePatchRect" parent="." unique_id=1810778705]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -413.30063
+offset_top = -307.75
+offset_right = 413.30063
+offset_bottom = 307.75
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("3_77opj")
+region_rect = Rect2(512, 640, 128, 128)
+patch_margin_left = 18
+patch_margin_top = 17
+patch_margin_right = 17
+patch_margin_bottom = 17
 
 [node name="Trash" type="RigidBody2D" parent="." unique_id=1095633944 groups=["trash"]]
-position = Vector2(0, 128)
+position = Vector2(-320, 16)
 input_pickable = true
+gravity_scale = 0.0
 script = ExtResource("2_4tnbk")
 
 [node name="Sprite2D" type="Sprite2D" parent="Trash" unique_id=1841692305]
-scale = Vector2(0.5, 0.5)
-texture = SubResource("AtlasTexture_osicj")
+scale = Vector2(0.6600006, 0.6600006)
+texture = SubResource("AtlasTexture_77opj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trash" unique_id=175166752]
+texture_filter = 3
+scale = Vector2(1.0164515, 0.9845378)
 shape = SubResource("CircleShape2D_fdm2o")
 
 [node name="TrashCan" type="Area2D" parent="." unique_id=806118591]
-position = Vector2(346, 102)
+position = Vector2(329, 2)
 script = ExtResource("4_77opj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TrashCan" unique_id=1923308030]
-position = Vector2(0, 19)
+position = Vector2(0, -2)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_fdm2o")
 
@@ -58,12 +80,42 @@ texture = SubResource("AtlasTexture_fdm2o")
 [node name="TimeLimit" type="Timer" parent="." unique_id=1346565063]
 
 [node name="TimerLabel" type="Label" parent="." unique_id=498032999]
-offset_right = 40.0
-offset_bottom = 23.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -280.0
+offset_right = 20.0
+offset_bottom = -257.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1125742650]
-position = Vector2(0, 43)
+position = Vector2(0, 149)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=1035178789]
-position = Vector2(0, 142)
+position = Vector2(0, 147)
 shape = SubResource("WorldBoundaryShape2D_3c2fn")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Ground" unique_id=154879935]
+position = Vector2(400, -149)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_3c2fn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground" unique_id=429954245]
+position = Vector2(-400, -170)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_3c2fn")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Ground" unique_id=1392019387]
+position = Vector2(0, -445)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_3c2fn")
+
+[node name="FailSound" type="AudioStreamPlayer" parent="." unique_id=1279864939]
+stream = ExtResource("5_dmp11")
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="." unique_id=801658676]
+stream = ExtResource("6_xxica")
