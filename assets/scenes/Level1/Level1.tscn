@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://cg381vcasw0ba" path="res://assets/scenes/leveldata/level_01.tres" id="2_pmnoc"]
 [ext_resource type="PackedScene" uid="uid://dvxoyqqygacuy" path="res://assets/scenes/point.tscn" id="3_cgcoo"]
 [ext_resource type="Script" uid="uid://dllfoqvgc5xlm" path="res://assets/scenes/Level1/hud.gd" id="3_pmnoc"]
+[ext_resource type="Texture2D" uid="uid://c6e8qhxkw55s8" path="res://background.png" id="4_18lw8"]
 [ext_resource type="Texture2D" uid="uid://bisynj7k4uhyl" path="res://assets.png" id="4_cgs8v"]
 [ext_resource type="FontFile" uid="uid://ce7hwvbr6rbep" path="res://fonts/GrapeSoda.ttf" id="5_lg6ro"]
 [ext_resource type="PackedScene" uid="uid://u1xu38as3u6o" path="res://assets/scenes/minigames/minigame_a/minigame_test.tscn" id="5_omqrc"]
@@ -42,6 +43,15 @@ point_count = 2
 [node name="Level1" type="Node2D" unique_id=1535856123]
 script = ExtResource("1_6l8r6")
 level_data = ExtResource("2_pmnoc")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=50367383]
+show_behind_parent = true
+offset_top = -39.999996
+offset_right = 2560.0
+offset_bottom = 1496.0
+scale = Vector2(0.453, 0.45)
+texture = ExtResource("4_18lw8")
+stretch_mode = 5
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=876693578]
 script = ExtResource("3_pmnoc")
@@ -192,18 +202,28 @@ scale_amount_min = 0.1
 scale_amount_max = 0.1
 scale_amount_curve = SubResource("Curve_18lw8")
 
-[node name="Point1" parent="." unique_id=558440410 instance=ExtResource("3_cgcoo")]
-position = Vector2(253, 361)
+[node name="Point4" parent="." unique_id=558440410 instance=ExtResource("3_cgcoo")]
+position = Vector2(720, 520)
+minigames_yellow = Array[PackedScene]([ExtResource("5_omqrc")])
+minigames_red = Array[PackedScene]([ExtResource("8_3f6xy")])
+
+[node name="Point5" parent="." unique_id=1417064844 instance=ExtResource("3_cgcoo")]
+position = Vector2(304, 544)
+minigames_yellow = Array[PackedScene]([ExtResource("5_omqrc")])
+minigames_red = Array[PackedScene]([ExtResource("8_3f6xy")])
+
+[node name="Point1" parent="." unique_id=1762001545 instance=ExtResource("3_cgcoo")]
+position = Vector2(168, 352)
 minigames_yellow = Array[PackedScene]([ExtResource("5_omqrc")])
 minigames_red = Array[PackedScene]([ExtResource("8_3f6xy")])
 
 [node name="Point2" parent="." unique_id=791976223 instance=ExtResource("3_cgcoo")]
-position = Vector2(575, 361)
+position = Vector2(560, 392)
 minigames_yellow = Array[PackedScene]([ExtResource("5_omqrc")])
 minigames_red = Array[PackedScene]([ExtResource("8_3f6xy")])
 
 [node name="Point3" parent="." unique_id=2101357343 instance=ExtResource("3_cgcoo")]
-position = Vector2(857, 361)
+position = Vector2(928, 248)
 minigames_yellow = Array[PackedScene]([ExtResource("5_omqrc")])
 minigames_red = Array[PackedScene]([ExtResource("8_3f6xy")])
 

@@ -23,13 +23,15 @@ const COLOR_SUCCESS := Color(0.4, 1.0, 0.4)
 @export var failure_time_penalty: int = 10
 
 @onready var timer: Timer = $TimeLimit
-@onready var timer_label: Label = $TimerLabel
+@onready var timer_bar: TextureProgressBar = $MinigameTimer
+@onready var timer_label: Label = $MinigameTimer/TimerLabel
 @onready var display_label: Label = $Cellphone/DisplayLabel
 @onready var keypad: GridContainer = $Cellphone/Keypad
 @onready var delete_button: Button = $Cellphone/Keypad/ButtonDel
 @onready var call_button: Button = $Cellphone/Keypad/ButtonCall
 @onready var background: NinePatchRect = $background
 @onready var cellphone: Sprite2D = $Cellphone
+@onready var note: Sprite2D = $Note
 
 @onready var key_sound: AudioStreamPlayer = get_node_or_null("KeySound")
 @onready var wrong_sound: AudioStreamPlayer = get_node_or_null("WrongSound")
@@ -40,6 +42,7 @@ var finished: bool = false
 var dialed_number: String = ""
 var display_origin: Vector2
 var cellphone_base_scale: Vector2
+var note_base_scale: Vector2
 var punch_tweens: Dictionary = {}  # Control -> Tween, evita tweens brigando pelo mesmo nó
 
 
@@ -47,7 +50,11 @@ func _ready() -> void:
 	position = get_viewport_rect().size / 2
 	display_origin = display_label.position
 	cellphone_base_scale = cellphone.scale
+	cellphone_base_scale = cellphone.scale
+	note_base_scale = note.scale
 	time_left = time_limit
+	timer_bar.max_value = time_limit
+	timer_bar.value = time_limit
 
 	timer.wait_time = time_limit
 	timer.one_shot = true
@@ -63,7 +70,8 @@ func _process(delta: float) -> void:
 	if finished:
 		return
 	time_left = max(time_left - delta, 0.0)
-	timer_label.text = "%.1f" % time_left
+	timer_label.text = "%d" % int(time_left)
+	timer_bar.value = time_left
 
 
 # --- Teclado -----------------------------------------------------------------
@@ -167,6 +175,9 @@ func _play_intro_animation() -> void:
 	timer_label.modulate.a = 0.0
 	cellphone.modulate.a = 0.0
 	cellphone.scale = cellphone_base_scale * CELLPHONE_START_SCALE
+	note.modulate.a = 0.0
+	note.scale = note_base_scale * CELLPHONE_START_SCALE
+	
 
 	var final_size := background.size
 	background.size = Vector2.ZERO
@@ -175,10 +186,13 @@ func _play_intro_animation() -> void:
 	# 1. Fundo cresce
 	tween.tween_property(background, "size", final_size, 0.2)
 	tween.tween_interval(0.2)
-	# 2. Celular aparece devagar, com "pop" de mola
+	# 2. Celular e note aparecem devagar, com "pop" de mola
 	tween.tween_property(cellphone, "modulate:a", 1.0, CELLPHONE_FADE_TIME)
 	tween.parallel().tween_property(cellphone, "scale", cellphone_base_scale, CELLPHONE_FADE_TIME) \
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(note, "modulate:a", 1.0, CELLPHONE_FADE_TIME)
+	tween.parallel().tween_property(note, "scale", note_base_scale, CELLPHONE_FADE_TIME) \
+	.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	# 3. Visor, teclado e timer aparecem juntos
 	tween.tween_property(display_label, "modulate:a", 1.0, 0.2)
 	tween.parallel().tween_property(keypad, "modulate:a", 1.0, 0.2)

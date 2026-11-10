@@ -5,6 +5,12 @@ const BACKGROUND_FADE_TIME := 1.5
 const IMAGE_FADE_TIME := 0.8
 const BUTTONS_FADE_TIME := 0.6
 const DELAY_BETWEEN_STEPS := 0.2
+const FRAME_INTERVAL := 2
+const FRAME_FADE_TIME := 0.5
+
+@export var frames: Array[Texture2D] = []
+
+var frame_index: int = 0
 
 @onready var retry_button: Button = $VBoxContainer/VBoxContainer/RetryButton
 @onready var menu_button: Button = $VBoxContainer/VBoxContainer/MenuButton
@@ -17,6 +23,7 @@ func _ready() -> void:
 	retry_button.pressed.connect(_on_retry_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
 	_play_intro_animation()
+	_start_image_cycle()
 
 
 func _play_intro_animation() -> void:
@@ -49,6 +56,24 @@ func _on_retry_pressed() -> void:
 	get_tree().reload_current_scene()
 
 
+
 func _on_menu_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://assets/scenes/main_menu/main_menu.tscn")
+
+func _start_image_cycle() -> void:
+	if frames.size() < 2:
+		return
+
+	var cycle := create_tween().set_loops()
+	cycle.tween_interval(FRAME_INTERVAL)
+	# fade out da imagem atual
+	cycle.tween_property(game_over_imagem, "self_modulate:a", 0.0, FRAME_FADE_TIME)
+	# troca a textura enquanto está invisível
+	cycle.tween_callback(_next_frame)
+	# fade in da nova imagem
+	cycle.tween_property(game_over_imagem, "self_modulate:a", 1.0, FRAME_FADE_TIME)
+
+func _next_frame() -> void:
+	frame_index = (frame_index + 1) % frames.size()
+	game_over_imagem.texture = frames[frame_index]

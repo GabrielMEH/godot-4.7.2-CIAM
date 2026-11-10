@@ -14,6 +14,7 @@ var progress_limit: float
 var progress_limit_curr: float
 var progress_negative: int
 var time_left: int
+@onready var hud: CanvasLayer = $Hud
 @onready var ember_particle: CPUParticles2D = $Hud/EmberParticle
 var reds: int
 var finished: bool = false  # true quando o nível acabou (vitória ou derrota)
@@ -54,7 +55,7 @@ func _process(delta: float) -> void:
 #reduz timer do nivel
 func process_time(delta: float) -> void:
 	if is_running and time_limit_timer > 0:
-		time_limit_timer -= delta
+		time_limit_timer -= delta + (delta*reds*0.33)
 		time_limit_timer = max(time_limit_timer, 0)
 		time_updated.emit(time_limit_timer, level_data.time_limit)
 		if time_limit_timer == 0:
@@ -137,3 +138,4 @@ func remove_red() -> void:
 
 func process_ember() -> void:
 	ember_particle.emitting = reds > 0
+	hud.change_time_color(reds)

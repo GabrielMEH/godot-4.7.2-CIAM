@@ -14,7 +14,7 @@ const BLINK_MIN_INTENSITY := 0.4  # o quanto o alpha cai no "vale" do pulso
 @onready var positive_audio2: AudioStreamPlayer = $PositiveAudio2
 @onready var negative_audio: AudioStreamPlayer = $NegativeAudio
 @onready var floating_text: Label = $level_progress_bar/FloatingText
-
+var timer_tween: Tween
 const FLOAT_TEXT_RISE := 40.0
 const FLOAT_COLOR_GAIN := Color(0.55, 1.0, 0.35)
 const FLOAT_COLOR_LOSS := Color(1.0, 0.35, 0.3)
@@ -111,3 +111,11 @@ func _show_floating_text(value: float) -> void:
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	floating_text_tween.tween_property(floating_text, "modulate:a", 0.0, 0.4).set_delay(0.5)
 	floating_text_tween.chain().tween_callback(floating_text.hide)
+
+func change_time_color(reds: int) -> void:
+	if timer_tween:
+		timer_tween.kill()
+	timer_tween = create_tween()
+
+	var target_color := Color(1.0, 0.141, 0.141, 1.0) if reds > 0 else Color.WHITE
+	timer_tween.tween_property(time_limit_bar, "tint_progress", target_color, 1.0)

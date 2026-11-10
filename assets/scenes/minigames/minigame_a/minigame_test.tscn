@@ -3,9 +3,21 @@
 [ext_resource type="Script" uid="uid://2acjfaxwahiq" path="res://assets/scenes/minigames/minigame_a.gd" id="1_o5olm"]
 [ext_resource type="Script" uid="uid://r4yfs5hln74s" path="res://assets/scenes/minigames/minigame_a/trash.gd" id="2_4tnbk"]
 [ext_resource type="Texture2D" uid="uid://bisynj7k4uhyl" path="res://assets.png" id="3_77opj"]
+[ext_resource type="Texture2D" uid="uid://b137uuyypof1q" path="res://minigame.png" id="3_xxica"]
 [ext_resource type="Script" uid="uid://b4m5pn6gbosu7" path="res://assets/scenes/minigames/minigame_a/trash_can.gd" id="4_77opj"]
 [ext_resource type="AudioStream" uid="uid://d4goy23i0mfcj" path="res://audio/Error1.wav" id="5_dmp11"]
 [ext_resource type="AudioStream" uid="uid://d2vptk0ktn0pp" path="res://audio/paper-5.mp3" id="6_xxica"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdm2o"]
+size = Vector2(28.5, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_osicj"]
+atlas = ExtResource("3_77opj")
+region = Rect2(896, 1152, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdm2o"]
+atlas = ExtResource("3_77opj")
+region = Rect2(256, 512, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_77opj"]
 atlas = ExtResource("3_77opj")
@@ -14,14 +26,35 @@ region = Rect2(0, 512, 256, 256)
 [sub_resource type="CircleShape2D" id="CircleShape2D_fdm2o"]
 radius = 56.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdm2o"]
-size = Vector2(28.5, 28)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fdm2o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_syemq"]
 atlas = ExtResource("3_77opj")
-region = Rect2(256, 512, 256, 256)
+region = Rect2(1536, 896, 256, 256)
+
+[sub_resource type="Curve" id="Curve_6wcbk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjjhq"]
+atlas = ExtResource("3_77opj")
+region = Rect2(1280, 1152, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yliq7"]
+atlas = ExtResource("3_77opj")
+region = Rect2(1536, 1152, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhwkn"]
+atlas = ExtResource("3_77opj")
+region = Rect2(1792, 1152, 256, 256)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3c2fn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3c2fn"]
+atlas = ExtResource("3_77opj")
+region = Rect2(1024, 896, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u840f"]
+atlas = ExtResource("3_77opj")
+region = Rect2(1280, 896, 256, 256)
 
 [node name="minigame_a" type="Node2D" unique_id=1340375373]
 script = ExtResource("1_o5olm")
@@ -36,7 +69,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -413.30063
 offset_top = -307.75
-offset_right = 413.30063
+offset_right = 413.3007
 offset_bottom = 307.75
 grow_horizontal = 2
 grow_vertical = 2
@@ -48,9 +81,39 @@ patch_margin_left = 18
 patch_margin_top = 17
 patch_margin_right = 17
 patch_margin_bottom = 17
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="background" unique_id=842143503]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_xxica")
+expand_mode = 2
+
+[node name="TrashCan" type="Area2D" parent="." unique_id=806118591]
+position = Vector2(0, 200.00002)
+scale = Vector2(1.24, 1.24)
+script = ExtResource("4_77opj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrashCan" unique_id=1923308030]
+position = Vector2(0, -2)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_fdm2o")
+
+[node name="Note" type="Sprite2D" parent="TrashCan" unique_id=1156943960]
+position = Vector2(-200, -180.64517)
+scale = Vector2(0.5424647, 0.5424647)
+texture = SubResource("AtlasTexture_osicj")
+
+[node name="Sprite2D" type="Sprite2D" parent="TrashCan" unique_id=1421867816]
+scale = Vector2(0.4, 0.4)
+texture = SubResource("AtlasTexture_fdm2o")
 
 [node name="Trash" type="RigidBody2D" parent="." unique_id=1095633944 groups=["trash"]]
-position = Vector2(-320, 16)
 input_pickable = true
 gravity_scale = 0.0
 script = ExtResource("2_4tnbk")
@@ -64,33 +127,109 @@ texture_filter = 3
 scale = Vector2(1.0164515, 0.9845378)
 shape = SubResource("CircleShape2D_fdm2o")
 
-[node name="TrashCan" type="Area2D" parent="." unique_id=806118591]
-position = Vector2(329, 2)
-script = ExtResource("4_77opj")
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Trash" unique_id=1639093281]
+position = Vector2(-40, -32)
+amount = 20
+texture = SubResource("AtlasTexture_syemq")
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 11.82
+direction = Vector2(-1, -1)
+gravity = Vector2(0, 0)
+initial_velocity_max = 10.0
+scale_amount_min = 0.0
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_6wcbk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TrashCan" unique_id=1923308030]
-position = Vector2(0, -2)
-scale = Vector2(4, 4)
-shape = SubResource("RectangleShape2D_fdm2o")
+[node name="Trash3" type="RigidBody2D" parent="." unique_id=1257766863 groups=["trash"]]
+position = Vector2(248, 72)
+input_pickable = true
+gravity_scale = 0.0
+script = ExtResource("2_4tnbk")
 
-[node name="Sprite2D" type="Sprite2D" parent="TrashCan" unique_id=1421867816]
-scale = Vector2(0.5, 0.5)
-texture = SubResource("AtlasTexture_fdm2o")
+[node name="Sprite2D" type="Sprite2D" parent="Trash3" unique_id=1327396175]
+scale = Vector2(0.6600006, 0.6600006)
+texture = SubResource("AtlasTexture_tjjhq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trash3" unique_id=1181626047]
+texture_filter = 3
+scale = Vector2(1.0164515, 0.9845378)
+shape = SubResource("CircleShape2D_fdm2o")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Trash3" unique_id=786473708]
+position = Vector2(-16, -8)
+amount = 20
+texture = SubResource("AtlasTexture_syemq")
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 11.82
+direction = Vector2(-1, -1)
+gravity = Vector2(0, 0)
+initial_velocity_max = 10.0
+scale_amount_min = 0.0
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_6wcbk")
+
+[node name="Trash4" type="RigidBody2D" parent="." unique_id=541882761 groups=["trash"]]
+position = Vector2(-48, -168)
+input_pickable = true
+gravity_scale = 0.0
+script = ExtResource("2_4tnbk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Trash4" unique_id=343223501]
+scale = Vector2(0.6600006, 0.6600006)
+texture = SubResource("AtlasTexture_yliq7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trash4" unique_id=311171572]
+texture_filter = 3
+scale = Vector2(1.0164515, 0.9845378)
+shape = SubResource("CircleShape2D_fdm2o")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Trash4" unique_id=188629590]
+position = Vector2(16, 8)
+amount = 20
+texture = SubResource("AtlasTexture_syemq")
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 11.82
+direction = Vector2(-1, -1)
+gravity = Vector2(0, 0)
+initial_velocity_max = 10.0
+scale_amount_min = 0.0
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_6wcbk")
+
+[node name="Trash2" type="RigidBody2D" parent="." unique_id=1253626484 groups=["trash"]]
+position = Vector2(184, -176)
+input_pickable = true
+gravity_scale = 0.0
+script = ExtResource("2_4tnbk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Trash2" unique_id=663198335]
+rotation = 0.28811145
+scale = Vector2(-0.66, 0.66)
+texture = SubResource("AtlasTexture_mhwkn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trash2" unique_id=1780079308]
+texture_filter = 3
+scale = Vector2(1.0164515, 0.9845378)
+shape = SubResource("CircleShape2D_fdm2o")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Trash2" unique_id=24092994]
+position = Vector2(8, 24)
+amount = 20
+texture = SubResource("AtlasTexture_syemq")
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 11.82
+direction = Vector2(-1, -1)
+gravity = Vector2(0, 0)
+initial_velocity_max = 10.0
+scale_amount_min = 0.0
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_6wcbk")
 
 [node name="TimeLimit" type="Timer" parent="." unique_id=1346565063]
-
-[node name="TimerLabel" type="Label" parent="." unique_id=498032999]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -280.0
-offset_right = 20.0
-offset_bottom = -257.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1125742650]
 position = Vector2(0, 149)
@@ -119,3 +258,47 @@ stream = ExtResource("5_dmp11")
 
 [node name="PickupSound" type="AudioStreamPlayer" parent="." unique_id=801658676]
 stream = ExtResource("6_xxica")
+
+[node name="MinigameTimer" type="TextureProgressBar" parent="." unique_id=1535038405]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -376.0
+offset_top = -278.0
+offset_right = -120.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+step = 0.1
+value = 30.0
+fill_mode = 5
+texture_under = SubResource("AtlasTexture_3c2fn")
+texture_progress = SubResource("AtlasTexture_u840f")
+
+[node name="TimerLabel" type="Label" parent="MinigameTimer" unique_id=498032999]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.18431373, 0.08627451, 0.078431375, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 70
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1

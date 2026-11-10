@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dn0pg4pgfcjhe" path="res://fire_call_minigame.gd" id="1_n61yo"]
 [ext_resource type="Texture2D" uid="uid://bisynj7k4uhyl" path="res://assets.png" id="2_svm36"]
+[ext_resource type="Texture2D" uid="uid://durnjp1e74bgf" path="res://fire_call.png" id="3_hcthr"]
 [ext_resource type="AudioStream" uid="uid://d4goy23i0mfcj" path="res://audio/Error1.wav" id="3_svm36"]
 [ext_resource type="AudioStream" uid="uid://b1ugq23726oty" path="res://audio/click.wav" id="4_tlrhy"]
 [ext_resource type="AudioStream" uid="uid://bwxn8wy7xw7v0" path="res://audio/gta_ring.wav" id="5_hiylt"]
@@ -9,6 +10,32 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_fdm2o"]
 atlas = ExtResource("2_svm36")
 region = Rect2(0, 768, 512, 768)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hiylt"]
+bg_color = Color(0, 0, 0, 0.34509805)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hcthr"]
+bg_color = Color(0, 0, 0, 0.6392157)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3c2fn"]
+atlas = ExtResource("2_svm36")
+region = Rect2(512, 1024, 384, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hiylt"]
+atlas = ExtResource("2_svm36")
+region = Rect2(1024, 896, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcthr"]
+atlas = ExtResource("2_svm36")
+region = Rect2(1280, 896, 256, 256)
 
 [node name="FireCallMinigame" type="Node2D" unique_id=146143458]
 script = ExtResource("1_n61yo")
@@ -34,21 +61,18 @@ patch_margin_top = 17
 patch_margin_right = 17
 patch_margin_bottom = 17
 
-[node name="TimeLimit" type="Timer" parent="." unique_id=1475595370]
-
-[node name="TimerLabel" type="Label" parent="." unique_id=454098429]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -280.0
-offset_right = 20.0
-offset_bottom = -257.0
+[node name="TextureRect" type="TextureRect" parent="background" unique_id=2102505594]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
+texture = ExtResource("3_hcthr")
+expand_mode = 5
+
+[node name="TimeLimit" type="Timer" parent="." unique_id=1475595370]
 
 [node name="Cellphone" type="Sprite2D" parent="." unique_id=225091628]
 position = Vector2(-2, 8)
@@ -87,72 +111,96 @@ columns = 3
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "1"
 
 [node name="Button2" type="Button" parent="Cellphone/Keypad" unique_id=88623894]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "2"
 
 [node name="Button3" type="Button" parent="Cellphone/Keypad" unique_id=387882153]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "3"
 
 [node name="Button4" type="Button" parent="Cellphone/Keypad" unique_id=786380719]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "4"
 
 [node name="Button5" type="Button" parent="Cellphone/Keypad" unique_id=792108185]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "5"
 
 [node name="Button6" type="Button" parent="Cellphone/Keypad" unique_id=1683068726]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "6"
 
 [node name="Button7" type="Button" parent="Cellphone/Keypad" unique_id=406577526]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "7"
 
 [node name="Button8" type="Button" parent="Cellphone/Keypad" unique_id=454467925]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "8"
 
 [node name="Button9" type="Button" parent="Cellphone/Keypad" unique_id=1727493417]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "9"
 
 [node name="ButtonDel" type="Button" parent="Cellphone/Keypad" unique_id=308908547]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "⌫"
 
 [node name="Button0" type="Button" parent="Cellphone/Keypad" unique_id=1567399804]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "0"
 
 [node name="ButtonCall" type="Button" parent="Cellphone/Keypad" unique_id=1716232806]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_hiylt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hcthr")
 text = "📞"
 
 [node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=607201083]
@@ -163,3 +211,52 @@ stream = ExtResource("4_tlrhy")
 
 [node name="RingingSound" type="AudioStreamPlayer" parent="." unique_id=1013701991]
 stream = ExtResource("5_hiylt")
+
+[node name="Note" type="Sprite2D" parent="." unique_id=556246680]
+position = Vector2(-264, -8)
+scale = Vector2(0.63999903, 0.63999903)
+texture = SubResource("AtlasTexture_3c2fn")
+
+[node name="MinigameTimer" type="TextureProgressBar" parent="." unique_id=1155616266]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -376.0
+offset_top = -278.0
+offset_right = -120.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+step = 0.1
+value = 30.0
+fill_mode = 5
+texture_under = SubResource("AtlasTexture_hiylt")
+texture_progress = SubResource("AtlasTexture_hcthr")
+
+[node name="TimerLabel" type="Label" parent="MinigameTimer" unique_id=51951664]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.18431373, 0.08627451, 0.078431375, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 70
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6b86fyjuxbc1"
-path="res://.godot/imported/error-4-256.png-14ceb8a5215402d3de1681e6fb4c70c9.ctex"
+uid="uid://b137uuyypof1q"
+path="res://.godot/imported/minigame.png-acdf1775d10d7b302b47bf0dd7fb347f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://error-4-256.png"
-dest_files=["res://.godot/imported/error-4-256.png-14ceb8a5215402d3de1681e6fb4c70c9.ctex"]
+source_file="res://minigame.png"
+dest_files=["res://.godot/imported/minigame.png-acdf1775d10d7b302b47bf0dd7fb347f.ctex"]
 
 [params]
 
